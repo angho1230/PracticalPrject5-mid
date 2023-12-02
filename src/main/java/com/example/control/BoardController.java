@@ -31,7 +31,13 @@ public class BoardController {
         else
             System.out.println("데이터 추가 성공!!!");
         return "redirect:list";
-}
+    }
+    @RequestMapping(value = "/board/view/{id}", method = RequestMethod.GET)
+    public String veiwPost(@PathVariable("id") int id, Model model){
+        BoardVO boardVO = boardService.getBoard(id);
+        model.addAttribute("u", boardVO);
+        return "view";
+    }
     @RequestMapping(value = "/board/editform/{id}", method = RequestMethod.GET)
     public String editPost(@PathVariable("id") int id, Model model){
         BoardVO boardVO = boardService.getBoard(id);
